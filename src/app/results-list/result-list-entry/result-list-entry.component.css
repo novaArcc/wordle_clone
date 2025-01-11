@@ -1,3 +1,68 @@
+
+.letter-square {
+    display: inline-block; 
+    width: 50px; 
+    height: 50px; 
+    line-height: 50px; 
+    text-align: center; 
+    font-size: 24px; 
+    font-weight: bold;
+    border-radius: 8px; 
+    margin: 5px; 
+    transform-style: preserve-3d;
+    perspective: 500px;
+    opacity: 0; 
+    animation: flip 0.6s ease-in-out forwards;
+}
+
+.no-match {
+    background-color: darkgray;
+}
+
+.wrong-place {
+    background-color: yellow;
+}
+
+.match {
+    background-color: greenyellow;
+}
+
+@keyframes flip {
+    0% {
+        transform: rotateY(0deg);
+        opacity: 0; 
+    }
+    100% {
+        transform: rotateY(360deg);
+        opacity: 1; 
+    }
+}
+
+.letter-square.flip {
+    animation-delay: 0s; 
+}
+
+.letter-square.flip-1 {
+    animation-delay: 0.6s; 
+}
+
+.letter-square.flip-2 {
+    animation-delay: 1.2s; 
+}
+
+.letter-square.flip-3 {
+    animation-delay: 1.8s; 
+}
+
+.letter-square.flip-4 {
+    animation-delay: 2.6s; 
+}
+
+
 .result-list-entry {
-    display: flex;
+    display: flex; 
+    flex-direction: row; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 5px; 
 }

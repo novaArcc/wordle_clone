@@ -1,6 +1,17 @@
-<mat-card>
-  <mat-card-header> 
-    <app-input-field></app-input-field>
-  </mat-card-header>
-  <app-results-list></app-results-list>
-</mat-card>
+<body>
+  <header>
+    <h1 class="title">WORDLE</h1>
+  </header>
+  <div class="letter-boxes-container">
+    <mat-card>
+      <mat-card-header>
+        <div class="letter-box">
+          <app-input-field class="input"></app-input-field>
+        </div>
+      </mat-card-header>
+      <div class="letter-box">
+        <app-results-list></app-results-list>
+      </div>
+    </mat-card>
+  </div>
+</body>

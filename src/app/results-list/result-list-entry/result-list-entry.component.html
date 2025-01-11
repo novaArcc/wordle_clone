@@ -1,10 +1,19 @@
 <div class="result-list-entry">
-    <div *ngFor="let letterResult of result?.letterResults" >
-        <div [ngSwitch]="letterResult.resultType">
-            <p *ngSwitchCase="'NO_MATCH'" style="background-color: darkgray;"> {{letterResult.letter}}</p>
-            <p *ngSwitchCase="'WRONG_PLACE'" style="background-color: yellow;"> {{letterResult.letter}}</p>
-            <p *ngSwitchCase="'MATCH'" style="background-color: greenyellow;"> {{letterResult.letter}}</p>
-        </div>
+    <div *ngFor="let letterResult of result?.letterResults; let i = index">
+      <div [ngSwitch]="letterResult.resultType">
+        <p *ngSwitchCase="'NO_MATCH'" 
+           [ngClass]="['letter-square', 'flip-' + i, 'no-match']">
+          {{letterResult.letter}}
+        </p>
+        <p *ngSwitchCase="'WRONG_PLACE'" 
+           [ngClass]="['letter-square', 'flip-' + i, 'wrong-place']">
+          {{letterResult.letter}}
+        </p>
+        <p *ngSwitchCase="'MATCH'" 
+           [ngClass]="['letter-square', 'flip-' + i, 'match']">
+          {{letterResult.letter}}
+        </p>
+      </div>
     </div>
-</div>
-
+  </div>
+  

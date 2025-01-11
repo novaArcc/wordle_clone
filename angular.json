@@ -102,5 +102,8 @@
       }
     }
   },
-  "defaultProject": "wordle-clone"
+  "defaultProject": "wordle-clone",
+  "cli": {
+    "analytics": false
+  }
 }
