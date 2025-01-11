@@ -1,0 +1,10 @@
+<div class="result-list-entry">
+    <div *ngFor="let letterResult of result?.letterResults" >
+        <div [ngSwitch]="letterResult.resultType">
+            <p *ngSwitchCase="'NO_MATCH'" style="background-color: darkgray;"> {{letterResult.letter}}</p>
+            <p *ngSwitchCase="'WRONG_PLACE'" style="background-color: yellow;"> {{letterResult.letter}}</p>
+            <p *ngSwitchCase="'MATCH'" style="background-color: greenyellow;"> {{letterResult.letter}}</p>
+        </div>
+    </div>
+</div>
+
