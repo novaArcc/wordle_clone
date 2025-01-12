@@ -36,8 +36,10 @@ export class WordleService {
           return result;
         }),
         tap((result) => {
-          if(!result.letterResults.some(r => r.resultType != 'MATCH')){
-            alert("Congrats")
+          if (!result.wasValidWord) {
+            alert('This is not a real word.');
+          } else if (!result.letterResults.some(r => r.resultType !== 'MATCH')) {
+            alert('Congrats');
           }
         })
       );
@@ -52,11 +54,11 @@ export class WordleService {
     for (let index = 0; index < word.length; index++) {
       const element = word.charAt(index);
       console.log(element);
-      
+
       let resultType: ResultType = 'NO_MATCH';
-      if (this.WORD.includes(element) && this.WORD.charAt(index) != element)
+      if (this.WORD.includes(element) && this.WORD.charAt(index) !== element)
         resultType = 'WRONG_PLACE';
-      else if (this.WORD.includes(element) && this.WORD.charAt(index) == element)
+      else if (this.WORD.includes(element) && this.WORD.charAt(index) === element)
         resultType = 'MATCH';
       results.push({ resultType: resultType, letter: element });
     }
@@ -76,3 +78,4 @@ export interface SingleLetterResult {
 }
 
 export type ResultType = 'NO_MATCH' | 'WRONG_PLACE' | 'MATCH';
+
