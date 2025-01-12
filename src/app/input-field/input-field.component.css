@@ -1,7 +1,5 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-#input {
-    width: 100%;
-    font-size: 22px;
-    padding-left: 10px;;
+.input-field-wrapper{
+    display: flex;
 }

@@ -1,1 +1,7 @@
-<input id="input" matInput [(ngModel)]="inputValue" (keyup.enter)="onEnterKeyPressed()">
+<div class="input-field-wrapper">
+    <div *ngFor="let letterBox of inputValues; let i = index">
+        <p>
+            {{letterBox}}
+        </p>
+    </div>
+</div>
