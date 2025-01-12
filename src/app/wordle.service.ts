@@ -11,34 +11,56 @@ export class WordleService {
 
   public WORD: string = 'CRANE';
 
+  private guessedWords: Set<string> = new Set();
+  private guessCount: number = 0; // Track the number of guesses
+
   results$: Observable<Result[]> = of([]);
 
   public testWord(word: string): Observable<Result> {
+    const upperWord = word.toUpperCase();
+
+    // If the user has already guessed the word, alert them
+    if (this.guessedWords.has(upperWord)) {
+      alert('Word already guessed.');
+      return of({ letterResults: [], wasValidWord: false });
+    }
+
+    // If the user has run out of guesses, alert them and stop further guesses
+    if (this.guessCount >= 5) {
+      alert("Sorry, you've run out of guesses.");
+      return of({ letterResults: [], wasValidWord: false });
+    }
+
     return this.http
       .get('https://api.dictionaryapi.dev/api/v2/entries/en/' + word)
       .pipe(
-        map((result) => {
-          return [word, true];
+        map(() => {
+          return [upperWord, true] as [string, boolean];
         }),
-        catchError((error) => {
-          return of(['', false]);
+        catchError(() => {
+          return of([upperWord, false] as [string, boolean]);
         }),
         map(([word, isValid]) => {
           if (isValid) {
-            return this.getResultFromWord((word as string).toUpperCase());
+            // Increment guess count only for valid words
+            this.guessCount++;
+            this.guessedWords.add(word); // Add word to guessed list
+            return this.getResultFromWord(word);
           } else {
             return { letterResults: [], wasValidWord: false };
           }
         }),
         withLatestFrom(this.results$),
         map(([result, results]) => {
-          results.push(result);
+          if (result.wasValidWord) {
+            results.push(result);
+          }
           return result;
         }),
         tap((result) => {
           if (!result.wasValidWord) {
             alert('This is not a real word.');
-          } else if (!result.letterResults.some(r => r.resultType !== 'MATCH')) {
+          } else if (!result.letterResults.some((r) => r.resultType !== 'MATCH')) {
             alert('Congrats');
           }
         })
@@ -78,4 +100,3 @@ export interface SingleLetterResult {
 }
 
 export type ResultType = 'NO_MATCH' | 'WRONG_PLACE' | 'MATCH';
-
