@@ -9,7 +9,7 @@
           <app-input-field class="input"></app-input-field>
         </div>
       </mat-card-header>
-      <div class="letter-box">
+      <div class="letter-box" *ngIf="showResults() | async">
         <app-results-list></app-results-list>
       </div>
     </mat-card>
