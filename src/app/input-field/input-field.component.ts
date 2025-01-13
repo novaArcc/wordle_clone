@@ -24,9 +24,9 @@ export class InputFieldComponent implements OnInit {
     let key = event.key;
     if (key == 'Enter') {
       if (!this.inputValues.some((v) => v == '')) {
-        this.wordleService
-          .testWord(this.inputValues.join(''))
-          .subscribe(() => {});
+        this.wordleService.testWord(this.inputValues.join('')).subscribe(() => {
+          this.clearInputField(); 
+        });
       }
     }
     if (key == 'Backspace') {
@@ -44,4 +44,9 @@ export class InputFieldComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  private clearInputField(): void {
+    this.inputValues = ['', '', '', '', ''];
+    this.letterToEdit = 0; 
+  }
 }

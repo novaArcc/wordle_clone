@@ -12,20 +12,18 @@ export class WordleService {
   public WORD: string = 'CRANE';
 
   private guessedWords: Set<string> = new Set();
-  private guessCount: number = 0; // Track the number of guesses
+  private guessCount: number = 0; 
 
   results$: Observable<Result[]> = of([]);
 
   public testWord(word: string): Observable<Result> {
     const upperWord = word.toUpperCase();
 
-    // If the user has already guessed the word, alert them
     if (this.guessedWords.has(upperWord)) {
       alert('Word already guessed.');
       return of({ letterResults: [], wasValidWord: false });
     }
 
-    // If the user has run out of guesses, alert them and stop further guesses
     if (this.guessCount >= 5) {
       alert("Sorry, you've run out of guesses.");
       return of({ letterResults: [], wasValidWord: false });
@@ -42,9 +40,9 @@ export class WordleService {
         }),
         map(([word, isValid]) => {
           if (isValid) {
-            // Increment guess count only for valid words
+
             this.guessCount++;
-            this.guessedWords.add(word); // Add word to guessed list
+            this.guessedWords.add(word); 
             return this.getResultFromWord(word);
           } else {
             return { letterResults: [], wasValidWord: false };
